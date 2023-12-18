@@ -1,0 +1,15 @@
+name: Weryfikacja Pull Request
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Miejsce na kod
+        run: |
+          echo "Dodam tutaj sprawdzanie kodu w następnym wyzwaniu"
