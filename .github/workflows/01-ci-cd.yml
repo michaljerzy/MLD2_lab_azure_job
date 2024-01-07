@@ -7,6 +7,7 @@ on:
 
 jobs:
   experiment:
+    environment: experiment
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
@@ -24,6 +25,7 @@ jobs:
 
   production:
     needs: experiment
+    environment: production
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
