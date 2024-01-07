@@ -18,6 +18,11 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set up secret file
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      run: |
+        echo $AZURE_CREDENTIALS
     - name: Train model using the diabetes-dev dataset
       run: |
         ls -l experimentation/data/diabetes-dev.csv
@@ -32,6 +37,11 @@ jobs:
       uses: actions/checkout@main
     - name: Install az ml extension
       run: az extension add -n ml -y
+    - name: Set up secret file
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      run: |
+        echo $AZURE_CREDENTIALS      
     - name: Azure login
       uses: azure/login@v1
       with:
