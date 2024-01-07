@@ -16,7 +16,7 @@ jobs:
     - name: Azure login
       uses: azure/login@v1
       with:
-        creds: ${{secrets.AZURE_CREDENTIALS_DEV}}
+        creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Train model using the diabetes-dev dataset
       run: |
         ls -l experimentation/data/diabetes-dev.csv
@@ -33,7 +33,7 @@ jobs:
     - name: Azure login
       uses: azure/login@v1
       with:
-        creds: ${{secrets.AZURE_CREDENTIALS_PROD}}
+        creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Train model using the diabetes-prod dataset
       run: |
         ls -l production/data/diabetes-prod.csv
