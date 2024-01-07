@@ -1,0 +1,40 @@
+name: CI/CD workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_DEV}}
+    - name: Train model using the diabetes-dev dataset
+      run: |
+        ls -l experimentation/data/diabetes-dev.csv
+        # TODO: run the job and  add --stream to the CLI command to trigger the Azure Machine Learning job. 
+
+  production:
+    needs: experiment
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_PROD}}
+    - name: Train model using the diabetes-prod dataset
+      run: |
+        ls -l production/data/diabetes-prod.csv
+        # TODO: run the job and  add --stream to the CLI command to trigger the Azure Machine Learning job. 
