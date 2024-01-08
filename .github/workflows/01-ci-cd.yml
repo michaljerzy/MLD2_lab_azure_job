@@ -40,18 +40,13 @@ jobs:
         ls -l production/data/diabetes-prod.csv
 
   model_depolyment:
-    needs: production
-    environment: model_depolyment
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v2
+    - name: Check out repo
+      uses: actions/checkout@main
     - name: Install az ml extension
       run: az extension add -n ml -y
     - name: Azure login
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
-    - name: Wdrożenie Modelu do Endpoint
-      run: |
-        # Polecenia Azure CLI do wdrożenia model
