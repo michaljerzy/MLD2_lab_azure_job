@@ -10,7 +10,7 @@ jobs:
     environment: experiment
     runs-on: ubuntu-latest
     steps:
-    - name: Check out repo
+    - name: Checkout repo
       uses: actions/checkout@main
     - name: Install az ml extension
       run: az extension add -n ml -y
@@ -28,7 +28,7 @@ jobs:
     environment: production
     runs-on: ubuntu-latest
     steps:
-    - name: Check out repo
+    - name: Checkout repo
       uses: actions/checkout@main
     - name: Install az ml extension
       run: az extension add -n ml -y
@@ -40,3 +40,16 @@ jobs:
       run: |
         ls -l production/data/diabetes-prod.csv
         # TODO: run the job and  add --stream to the CLI command to trigger the Azure Machine Learning job. 
+
+  model_depolyment:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+    - name: Konfiguracja Azure CLI
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Wdrożenie Modelu do Endpoint
+      run: |
+        # Polecenia Azure CLI do wdrożenia modelu
