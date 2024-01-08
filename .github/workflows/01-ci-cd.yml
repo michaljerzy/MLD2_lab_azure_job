@@ -42,6 +42,8 @@ jobs:
         # TODO: run the job and  add --stream to the CLI command to trigger the Azure Machine Learning job. 
 
   model_depolyment:
+    needs: production
+    environment: model_depolyment
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
@@ -49,7 +51,7 @@ jobs:
     - name: Konfiguracja Azure CLI
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Wdrożenie Modelu do Endpoint
       run: |
         # Polecenia Azure CLI do wdrożenia model
