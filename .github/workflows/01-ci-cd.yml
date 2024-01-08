@@ -52,4 +52,4 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Wdrożenie Modelu do Endpoint
       run: |
-        # Polecenia Azure CLI do wdrożenia modelu
+        # Polecenia Azure CLI do wdrożenia model
