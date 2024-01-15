@@ -20,7 +20,7 @@ jobs:
         id: ws_connect
         uses: azure/aml-workspace@v1
         with:
-          azure_credentials: ${{secrets.AZURE_CREDENTIALS }}
+          azure_credentials: ${{secrets.AZURE_CREDENTIALS}}
           parameters_file: "test/test_workspace.json"
 
       # register a given model from local system with AML
@@ -28,7 +28,7 @@ jobs:
         id: ws_registerlocalmodel
         uses: ./
         with:
-          azure_credentials: ${{secrets.AZURE_CREDENTIALS }}
+          azure_credentials: ${{secrets.AZURE_CREDENTIALS}}
           parameters_file: "test/test_registermodel_fromlocal.json"
 
       # register a given model with AML
