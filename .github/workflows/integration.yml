@@ -9,13 +9,18 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{github.ref}}
-
+      - name: Install az ml extension
+        run: az extension add -n ml -y
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
       # create or connect to a new Workspace
       - name: Connect or Create Workspace
         id: ws_connect
         uses: azure/aml-workspace@v1
         with:
-          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          azure_credentials: ${{secrets.AZURE_CREDENTIALS }}
           parameters_file: "test/test_workspace.json"
 
       # register a given model from local system with AML
@@ -23,7 +28,7 @@ jobs:
         id: ws_registerlocalmodel
         uses: ./
         with:
-          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          azure_credentials: ${{secrets.AZURE_CREDENTIALS }}
           parameters_file: "test/test_registermodel_fromlocal.json"
 
       # register a given model with AML
